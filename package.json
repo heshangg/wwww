@@ -1,0 +1,5 @@
+{
+  "name": "vercel-webhook-message-sender",
+  "version": "1.0.0",
+  "type": "module"
+}

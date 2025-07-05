@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Webhook Message</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: #2a2a3b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #ff4b4b;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 12px;
+      border: 2px solid #ff4b4b;
+      border-radius: 8px;
+      background: #1e1e2f;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff4b4b;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #e03a3a;
+    }
+    .red-line {
+      height: 3px;
+      background-color: #ff4b4b;
+      width: 100%;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Send to Webhook</h1>
+    <input type="text" id="message" placeholder="Type your message..." />
+    <br>
+    <button onclick="sendMessage()">Send</button>
+    <div class="red-line"></div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const message = document.getElementById("message").value;
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await res.json();
+      alert(data.success ? "✅ Message sent!" : "❌ Failed to send message.");
+    }
+  </script>
+</body>
+</html>
